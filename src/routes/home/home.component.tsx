@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import { FormattedMessage, useIntl } from 'react-intl';
 
 import { H1 } from '../../theme/typography';
-import { Container } from './home.styles';
+import { Container, Logo } from './home.styles';
 
 export const Home = () => {
   const intl = useIntl();
@@ -19,6 +19,7 @@ export const Home = () => {
       <H1>
         <FormattedMessage defaultMessage="Water me - the app" description="Home / title" />
       </H1>
+      <Logo />
     </Container>
   );
 };
