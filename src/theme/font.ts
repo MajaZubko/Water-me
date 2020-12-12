@@ -1,5 +1,5 @@
 export const fontFamily = {
-  primary: 'OpenSans',
+  primary: 'Trebuchet MS, sans-serif',
 };
 
 export const fontWeight = {
