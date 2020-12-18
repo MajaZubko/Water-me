@@ -6,6 +6,7 @@ import { DEFAULT_LOCALE, appLocales, translationMessages } from '../i18n';
 import { asyncComponent } from '../shared/utils/asyncComponent';
 import { AppComponent as App } from './app.component';
 import { ROUTES } from './app.constants';
+import { AllPlants } from './allPlants'
 //<-- IMPORT ROUTE -->
 
 const Home = asyncComponent(() => import('./home'), 'Home');
@@ -19,8 +20,9 @@ const MatchedLanguageComponent = () => {
         <Route exact path={`${match.path}${ROUTES.home}`}>
           <Home />
         </Route>
-        {/* <-- INJECT ROUTE --> */}
-
+        <Route exact path={`${match.path}${ROUTES.allPlants}`}>
+          <AllPlants />
+        </Route>
         <Route>
           <NotFound />
         </Route>
