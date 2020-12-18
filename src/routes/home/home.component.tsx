@@ -1,10 +1,7 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FormattedMessage, useIntl } from 'react-intl';
-
-import { LanguageSwitcher } from '../../shared/components/languageSwitcher';
 import { H1, StyledLink } from '../../theme/typography';
-import { Users } from '../../shared/components/users';
 import { Container, Logo } from './home.styles';
 
 export const Home = () => {
@@ -18,17 +15,11 @@ export const Home = () => {
           description: 'Home / page title',
         })}
       />
-
       <H1>
-        <FormattedMessage defaultMessage="Hello world!" description="Home / title" />
+        <FormattedMessage defaultMessage="Water me - the app" description="Home / title" />
       </H1>
       <StyledLink to='/en/allPlants'>See all plants</StyledLink>
-
       <Logo />
-
-      <LanguageSwitcher />
-
-      <Users />
     </Container>
   );
 };
