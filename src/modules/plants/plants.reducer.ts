@@ -16,7 +16,12 @@ const handleFetchPlantsSuccess = produce((draft: PlantsState, { payload }: Paylo
   draft.plants = payload;
 });
 
+const handleAddPlant = produce((draft: PlantsState, { payload }: PayloadAction<Plant>) => {
+  draft.plants.push(payload);
+});
+
 export const reducer = createReducer(INITIAL_STATE, (builder) => {
   builder.addCase(plantsActions.fetchPlants, handleFetchPlants);
   // builder.addCase(plantsActions.fetchPlants.resolved, handleFetchPlantsSuccess);
+  builder.addCase(plantsActions.addPlant, handleAddPlant);
 });
