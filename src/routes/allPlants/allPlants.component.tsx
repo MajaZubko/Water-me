@@ -22,9 +22,6 @@ export const AllPlants = () => {
       </H1>
       <StyledLink to="/">Watering calendar</StyledLink>
       <PlantsList />
-      <Container>
-        Dracena <br /> Monstera <br /> Epipremnum
-      </Container>
     </Container>
   );
 };
