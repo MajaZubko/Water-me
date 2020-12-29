@@ -1,22 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FormattedMessage } from 'react-intl';
+import { Formik } from 'formik';
 
-import { Button } from '../button';
-import { Container } from './plantsList.styles';
+import { Container, Button } from './plantsList.styles';
 import { usePlants } from './usePlants.hook';
 
 export const PlantsList = () => {
-  const [plants, addPlants] = usePlants();
-
+  const formValues = { name: '', location: '', waterNeeds: '', lastWatered: '' };
+  const [plants, addPlant] = usePlants();
+  console.log(plants);
   return (
     <Container>
-      <Button onClick={() => console.log('add plants')}>
-        <FormattedMessage defaultMessage="Add plants" description="Plants / add button" />
-      </Button>
-
+      <Formik initialValues={formValues} onSubmit={(values) => addPlant(values)}>
+        {({ handleSubmit, setFieldValue }) => (
+          <Container>
+            <label>Plant name</label>
+            <input type="text" onChange={(e) => setFieldValue('name', e.target.value)} />
+            <label>Location</label>
+            <input type="text" onChange={(e) => setFieldValue('location', e.target.value)} />
+            <label>Water needs</label>
+            <input type="text" onChange={(e) => setFieldValue('waterNeeds', e.target.value)} />
+            <label>Last watered</label>
+            <input type="text" onChange={(e) => setFieldValue('lastWatered', e.target.value)} />
+            <Button type="submit" onClick={() => handleSubmit()}>
+              <FormattedMessage defaultMessage="Add plant" description="Plants / add button" />
+            </Button>
+          </Container>
+        )}
+      </Formik>
       <ul>
         {plants.map((plant) => (
-          <li key={plant.id}>{plant.name}</li>
+          <li key={plant.name}>{plant.name}</li>
         ))}
       </ul>
     </Container>
