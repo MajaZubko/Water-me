@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import { v4 as uuidv4 } from 'uuid';
 
 import { Container, List, ListHeader, StyledCard, StyledButton, StyledInput } from './plantsList.styles';
 import { usePlants } from './usePlants.hook';
 
 export const PlantsList = () => {
-  const formValues = { name: '', location: '', waterNeeds: '', lastWatered: '' };
+  const formValues = { id: '', name: '', location: '', waterNeeds: '', lastWatered: '' };
   const [plants, fetchPlants, addPlant] = usePlants();
 
   useEffect(() => {
@@ -22,8 +25,8 @@ export const PlantsList = () => {
           <ListHeader>Water needs</ListHeader>
           <ListHeader>Last watered</ListHeader>
         </li>
-        {plants.map((plant) => (
-          <li key={plant.name}>
+        {plants.map((plant, i) => (
+          <li key={i}>
             <div>{plant.name}</div>
             <div>{plant.location}</div>
             <div>{plant.waterNeeds}</div>
@@ -36,6 +39,7 @@ export const PlantsList = () => {
         <Formik
           initialValues={formValues}
           onSubmit={(values, { resetForm }) => {
+            values.id = uuidv4();
             addPlant(values);
             resetForm(); //TODO nie działa czyszczenie forma
           }}

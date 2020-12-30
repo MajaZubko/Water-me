@@ -8,8 +8,10 @@ import { selectPlants } from './plants.selectors';
 function* fetchPlants() {
   try {
     const storagePlants = localStorage.getItem('plants');
-    const plants = JSON.parse(storagePlants || '');
-    yield put(plantsActions.fetchPlantsSuccess(plants));
+    if (storagePlants) {
+      const plants = JSON.parse(storagePlants || '');
+      yield put(plantsActions.fetchPlantsSuccess(plants));
+    }
   } catch (error) {
     reportError(error);
     yield put(plantsActions.fetchPlantsFailure(error));
