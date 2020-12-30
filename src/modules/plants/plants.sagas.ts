@@ -26,5 +26,10 @@ function* savePlants() {
 }
 
 export function* watchPlants() {
-  yield all([takeLatest(plantsActions.fetchPlants, fetchPlants), takeLatest(plantsActions.addPlant, savePlants)]);
+  yield all([
+    takeLatest(plantsActions.fetchPlants, fetchPlants),
+    takeLatest(plantsActions.addPlant, savePlants),
+    takeLatest(plantsActions.editPlant, savePlants),
+    takeLatest(plantsActions.deletePlant, savePlants),
+  ]);
 }

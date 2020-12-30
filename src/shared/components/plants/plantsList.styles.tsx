@@ -29,6 +29,18 @@ export const StyledButton = styled(Button)`
   }
 `;
 
+export const IconButton = styled.div`
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  color: gray;
+  cursor: pointer;
+
+  :hover {
+    background: whitesmoke;
+  }
+`;
+
 export const StyledInput = styled(Input)`
   && {
     width: 100%;
@@ -43,7 +55,7 @@ export const List = styled.ul`
 
   li {
     display: grid;
-    grid-template-columns: repeat(4, 150px);
+    grid-template-columns: repeat(4, 150px) 40px 40px;
     text-align: start;
     padding-bottom: 4px;
   }
