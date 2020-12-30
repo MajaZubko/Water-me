@@ -1,8 +1,10 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Calendar } from '../../shared/components/calendar';
 import { H1, StyledLink } from '../../theme/typography';
-import { Container, Logo } from './home.styles';
+import { Container, Logo, Heading } from './home.styles';
 
 export const Home = () => {
   const intl = useIntl();
@@ -15,11 +17,14 @@ export const Home = () => {
           description: 'Home / page title',
         })}
       />
-      <H1>
-        <FormattedMessage defaultMessage="Water me - the app" description="Home / title" />
-      </H1>
-      <StyledLink to='/en/allPlants'>See all plants</StyledLink>
-      <Logo />
+      <Heading>
+        <H1>
+          <FormattedMessage defaultMessage="Water me" description="Home / title" />
+        </H1>
+        <Logo />
+      </Heading>
+      <StyledLink to="/en/allPlants">See all plants</StyledLink>
+      <Calendar />
     </Container>
   );
 };
