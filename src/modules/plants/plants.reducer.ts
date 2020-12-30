@@ -22,6 +22,6 @@ const handleAddPlant = produce((draft: PlantsState, { payload }: PayloadAction<P
 
 export const reducer = createReducer(INITIAL_STATE, (builder) => {
   builder.addCase(plantsActions.fetchPlants, handleFetchPlants);
-  // builder.addCase(plantsActions.fetchPlants.resolved, handleFetchPlantsSuccess);
+  builder.addCase(plantsActions.fetchPlantsSuccess, handleFetchPlantsSuccess);
   builder.addCase(plantsActions.addPlant, handleAddPlant);
 });

@@ -1,18 +1,15 @@
-import { all, takeLatest } from 'redux-saga/effects';
+import { all, put, takeLatest } from 'redux-saga/effects';
 
 import { reportError } from '../../shared/utils/reportError';
-import { PromiseAction, resolvePromiseAction, rejectPromiseAction } from '../../shared/utils/reduxSagaPromise';
-import { api } from '../../shared/services/api';
+import { plants as plantsFixture } from '../../mocks/fixtures/plants.json';
 import * as plantsActions from './plants.actions';
-import { Plant } from './plants.types';
 
-function* fetchPlants(action: PromiseAction<void, Plant[]>) {
+function* fetchPlants() {
   try {
-    const { data } = yield api.get('/');
-    yield resolvePromiseAction(action, data);
+    yield put(plantsActions.fetchPlantsSuccess(plantsFixture));
   } catch (error) {
     reportError(error);
-    yield rejectPromiseAction(action, error);
+    yield put(plantsActions.fetchPlantsFailure(error));
   }
 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { FormattedMessage } from 'react-intl';
 import { Formik } from 'formik';
 
@@ -7,7 +7,11 @@ import { usePlants } from './usePlants.hook';
 
 export const PlantsList = () => {
   const formValues = { name: '', location: '', waterNeeds: '', lastWatered: '' };
-  const [plants, addPlant] = usePlants();
+  const [plants, fetchPlants, addPlant] = usePlants();
+
+  useEffect(() => {
+    fetchPlants();
+  }, []);
 
   return (
     <Container>

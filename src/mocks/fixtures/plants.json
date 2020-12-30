@@ -1,0 +1,15 @@
+{
+  "plants": [
+    {
+      "name": "Monstera",
+      "location": "Kitchen",
+      "waterNeeds": "Once a week",
+      "lastWatered": "2020-01-29"
+    },
+    {
+      "name": "Dracena",
+      "location": "Living room",
+      "waterNeeds": "Once a month",
+      "lastWatered": "2020-02-29"
+   }]
+}

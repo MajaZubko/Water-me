@@ -1,12 +1,16 @@
 import { actionCreator } from '../helpers';
-import { PlantsState, Plant } from './plants.types';
+import { Plant } from './plants.types';
 
-const { createPromiseAction } = actionCreator('PLANTS');
+const { createAction } = actionCreator('PLANTS');
 
-export const fetchPlants = createPromiseAction<void, PlantsState>('FETCH');
+export const fetchPlants = createAction<void>('FETCH');
 
-export const addPlant = createPromiseAction<Plant, PlantsState>('ADD');
+export const fetchPlantsSuccess = createAction<Plant[]>('FETCH_SUCCESS');
 
-export const deletePlant = createPromiseAction<Plant, PlantsState>('DELETE');
+export const fetchPlantsFailure = createAction<Error>('FETCH_FAILURE');
 
-export const editPlant = createPromiseAction<Plant, PlantsState>('EDIT');
+export const addPlant = createAction<Plant>('ADD');
+
+export const deletePlant = createAction<Plant>('DELETE');
+
+export const editPlant = createAction<Plant>('EDIT');

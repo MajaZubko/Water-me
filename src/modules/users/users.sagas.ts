@@ -1,4 +1,4 @@
-import { all, put, takeLatest } from 'redux-saga/effects';
+import { all, takeLatest } from 'redux-saga/effects';
 
 import { reportError } from '../../shared/utils/reportError';
 import { api } from '../../shared/services/api';
