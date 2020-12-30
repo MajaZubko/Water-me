@@ -1,10 +1,10 @@
 import React from 'react';
-
 import { Helmet } from 'react-helmet-async';
 import { FormattedMessage, useIntl } from 'react-intl';
 
-import { H1, StyledLink  } from '../../theme/typography';
-import { Container} from './allPlants.styles';
+import { PlantsList } from '../../shared/components/plants';
+import { H1, StyledLink } from '../../theme/typography';
+import { Container } from './allPlants.styles';
 
 export const AllPlants = () => {
   const intl = useIntl();
@@ -20,10 +20,8 @@ export const AllPlants = () => {
       <H1>
         <FormattedMessage defaultMessage="All plants" description="All plants / title" />
       </H1>
-      <StyledLink to='/'>Watering calendar</StyledLink>
-      <Container>
-        Dracena <br /> Monstera <br /> Epipremnum
-      </Container>
+      <StyledLink to="/">Watering calendar</StyledLink>
+      <PlantsList />
     </Container>
   );
 };
