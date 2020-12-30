@@ -11,5 +11,9 @@ export const Container = styled.div`
 
 export const Logo = styled(LogoSVG)`
   width: 100px;
-  margin-bottom: 20px;
+`;
+
+export const Heading = styled.div`
+  display: flex;
+  align-items: center;
 `;
