@@ -48,7 +48,7 @@ export const PlantsList = () => {
           onSubmit={(values, { resetForm }) => {
             values.id = uuidv4();
             addPlant(values);
-            resetForm(); //TODO nie działa czyszczenie forma
+            resetForm();
           }}
         >
           {({ handleSubmit, setFieldValue }) => (
@@ -57,9 +57,9 @@ export const PlantsList = () => {
               <StyledInput type="text" onChange={(e) => setFieldValue('name', e.target.value)} />
               <label>Location</label>
               <StyledInput type="text" onChange={(e) => setFieldValue('location', e.target.value)} />
-              <label>Water needs</label>
+              <label>Water needs (number of days)</label>
               <StyledInput type="text" onChange={(e) => setFieldValue('waterNeeds', e.target.value)} />
-              <label>Last watered</label>
+              <label>Last watered (YYYY-MM-DD)</label>
               <StyledInput type="text" onChange={(e) => setFieldValue('lastWatered', e.target.value)} />
               <StyledButton type="submit" onClick={() => handleSubmit()}>
                 <FormattedMessage defaultMessage="Add plant" description="Plants / add button" />
