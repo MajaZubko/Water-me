@@ -54,6 +54,7 @@
     "lint-staged": "^8.1.0",
     "lodash.throttle": "^4.1.1",
     "mockdate": "^3.0.2",
+    "moment": "^2.29.1",
     "msw": "^0.21.3",
     "normalize.css": "^8.0.1",
     "plop": "^2.2.0",

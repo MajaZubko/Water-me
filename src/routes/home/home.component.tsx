@@ -1,6 +1,8 @@
 import React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { FormattedMessage, useIntl } from 'react-intl';
+
+import { Calendar } from '../../shared/components/calendar';
 import { H1, StyledLink } from '../../theme/typography';
 import { Container, Logo, Heading } from './home.styles';
 
@@ -22,6 +24,7 @@ export const Home = () => {
         <Logo />
       </Heading>
       <StyledLink to="/en/allPlants">See all plants</StyledLink>
+      <Calendar />
     </Container>
   );
 };
