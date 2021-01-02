@@ -1,16 +1,12 @@
-import React, { useEffect } from 'react';
-import { FormattedMessage } from 'react-intl';
-import { Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
 import { Delete, Edit } from '@material-ui/icons';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { v4 as uuidv4 } from 'uuid';
 
-import { Container, IconButton, List, ListHeader, StyledCard, StyledButton, StyledInput } from './plantsList.styles';
+import { FormModal } from '../formModal';
+import { Container, IconButton, List, ListHeader, StyledButton } from './plantsList.styles';
 import { usePlants } from './usePlants.hook';
 
 export const PlantsList = () => {
-  const formValues = { id: '', name: '', location: '', waterNeeds: '', lastWatered: '' };
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [plants, fetchPlants, addPlant, deletePlant, editPlant] = usePlants();
 
   useEffect(() => {
@@ -19,6 +15,8 @@ export const PlantsList = () => {
 
   return (
     <Container>
+      <FormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} plant={plants[0]} action={addPlant} />
+      <StyledButton onClick={() => setIsModalOpen(true)}>Add plants</StyledButton>
       <List>
         <li>
           <ListHeader>Plant name</ListHeader>
@@ -41,33 +39,6 @@ export const PlantsList = () => {
           </li>
         ))}
       </List>
-
-      <StyledCard>
-        <Formik
-          initialValues={formValues}
-          onSubmit={(values, { resetForm }) => {
-            values.id = uuidv4();
-            addPlant(values);
-            resetForm();
-          }}
-        >
-          {({ handleSubmit, setFieldValue }) => (
-            <>
-              <label>Plant name</label>
-              <StyledInput type="text" onChange={(e) => setFieldValue('name', e.target.value)} />
-              <label>Location</label>
-              <StyledInput type="text" onChange={(e) => setFieldValue('location', e.target.value)} />
-              <label>Water needs (number of days)</label>
-              <StyledInput type="text" onChange={(e) => setFieldValue('waterNeeds', e.target.value)} />
-              <label>Last watered (YYYY-MM-DD)</label>
-              <StyledInput type="text" onChange={(e) => setFieldValue('lastWatered', e.target.value)} />
-              <StyledButton type="submit" onClick={() => handleSubmit()}>
-                <FormattedMessage defaultMessage="Add plant" description="Plants / add button" />
-              </StyledButton>
-            </>
-          )}
-        </Formik>
-      </StyledCard>
     </Container>
   );
 };

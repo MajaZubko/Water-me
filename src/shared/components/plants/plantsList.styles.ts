@@ -3,24 +3,8 @@ import { Button, Card, Input } from '@material-ui/core';
 
 export const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-`;
-
-export const StyledCard = styled(Card)`
-  display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  padding: 20px;
-  width: 400px;
-
-  label {
-    color: gray;
-    margin-top: 16px;
-  }
-
-  button {
-    align-self: flex-end;
-  }
+  justify-content: space-between;
 `;
 
 export const StyledButton = styled(Button)`
@@ -38,12 +22,6 @@ export const IconButton = styled.div`
 
   :hover {
     background: whitesmoke;
-  }
-`;
-
-export const StyledInput = styled(Input)`
-  && {
-    width: 100%;
   }
 `;
 
