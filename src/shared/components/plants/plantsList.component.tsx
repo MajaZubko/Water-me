@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { Delete, Edit } from '@material-ui/icons';
+import { isEmpty } from 'lodash';
 
 import { FormModal } from '../formModal';
 import { Container, IconButton, List, ListHeader, StyledButton } from './plantsList.styles';
 import { usePlants } from './usePlants.hook';
+import { emptyPlant } from './emptyPlant';
 
 export const PlantsList = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [plants, fetchPlants, addPlant, deletePlant, editPlant] = usePlants();
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMode, setModalMode] = useState('add');
+  const [modalPlant, setModalPlant] = useState(emptyPlant);
 
   useEffect(() => {
     fetchPlants();
@@ -15,8 +20,20 @@ export const PlantsList = () => {
 
   return (
     <Container>
-      <FormModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} plant={plants[0]} action={addPlant} />
-      <StyledButton onClick={() => setIsModalOpen(true)}>Add plants</StyledButton>
+      <FormModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        action={modalMode === 'add' ? addPlant : editPlant}
+        plant={modalPlant}
+      />
+      <StyledButton
+        onClick={() => {
+          setIsModalOpen(true);
+          setModalMode('add');
+        }}
+      >
+        Add plants
+      </StyledButton>
       <List>
         <li>
           <ListHeader>Plant name</ListHeader>
@@ -33,7 +50,13 @@ export const PlantsList = () => {
             <IconButton onClick={() => deletePlant(plant)}>
               <Delete />
             </IconButton>
-            <IconButton onClick={() => editPlant(plant)}>
+            <IconButton
+              onClick={() => {
+                setModalMode('edit');
+                setModalPlant(plant);
+                setIsModalOpen(true);
+              }}
+            >
               <Edit />
             </IconButton>
           </li>
