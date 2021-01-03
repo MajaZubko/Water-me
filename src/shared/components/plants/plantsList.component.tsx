@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { Delete, Edit } from '@material-ui/icons';
-import { isEmpty } from 'lodash';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 import { FormModal } from '../formModal';
 import { Container, IconButton, List, ListHeader, StyledButton } from './plantsList.styles';
 import { usePlants } from './usePlants.hook';
 import { emptyPlant } from './emptyPlant';
 
 export const PlantsList = () => {
-  const [plants, fetchPlants, addPlant, deletePlant, editPlant] = usePlants();
+  const [plants, fetchPlants, editPlant, addPlant, deletePlant] = usePlants();
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMode, setModalMode] = useState('add');
