@@ -65,6 +65,7 @@
     "prop-types": "^15.6.2",
     "ramda": "^0.26.1",
     "react": "^16.13.1",
+    "react-dates": "^21.8.0",
     "react-dom": "npm:@hot-loader/react-dom",
     "react-helmet-async": "^1.0.4",
     "react-intl": "^5.8.8",
