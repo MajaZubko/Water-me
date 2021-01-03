@@ -25,6 +25,7 @@ export const PlantsList = () => {
         onClose={() => setIsModalOpen(false)}
         action={modalMode === 'add' ? addPlant : editPlant}
         plant={modalPlant}
+        buttonText={modalMode === 'add' ? 'Add plant' : 'Edit plant'}
       />
       <StyledButton
         onClick={() => {
@@ -52,8 +53,8 @@ export const PlantsList = () => {
             </IconButton>
             <IconButton
               onClick={() => {
-                setModalMode('edit');
                 setModalPlant(plant);
+                setModalMode('edit');
                 setIsModalOpen(true);
               }}
             >

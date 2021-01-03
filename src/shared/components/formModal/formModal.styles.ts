@@ -12,6 +12,10 @@ export const Container = styled.div`
 export const StyledInput = styled(Input)`
   && {
     width: 400px;
+
+    input {
+      padding: 4px 0;
+    }
   }
 `;
 

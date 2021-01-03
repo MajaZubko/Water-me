@@ -1,12 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { FormattedMessage } from 'react-intl';
-import { Formik } from 'formik';
 import Modal from 'react-modal';
-import { isEqual } from 'lodash';
 
 import { Plant } from '../../../modules/plants/plants.types';
-import { emptyPlant } from '../plants';
 import { Container, StyledButton, StyledInput, StyledLabel, ModalBody, ModalFooter } from './formModal.styles';
 
 Modal.setAppElement('#app');
@@ -14,14 +10,18 @@ Modal.setAppElement('#app');
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
-  plant?: Plant;
+  plant: Plant;
   action: (plant: Plant) => void;
+  buttonText?: string;
 }
 
-//props: isOpen, plant, mode(edit, add, water, delayWater)
+export const FormModal = ({ isOpen, onClose, plant, action, buttonText }: ModalProps) => {
+  const [formValues, setFormValues] = useState(plant);
 
-export const FormModal = ({ isOpen, onClose, plant, action }: ModalProps) => {
-  console.log(plant);
+  useEffect(() => {
+    setFormValues(plant);
+  }, [plant]);
+
   return (
     <Container>
       <Modal
@@ -38,36 +38,46 @@ export const FormModal = ({ isOpen, onClose, plant, action }: ModalProps) => {
           },
         }}
       >
-        <Formik
-          enableReinitialize
-          initialValues={plant || emptyPlant}
-          onSubmit={(values, { resetForm }) => {
-            values.id = uuidv4();
-            action(values);
-            resetForm();
-            onClose();
-          }}
-        >
-          {({ handleSubmit, setFieldValue }) => (
-            <>
-              <ModalBody>
-                <StyledLabel>Plant name</StyledLabel>
-                <StyledInput type="text" onChange={(e) => setFieldValue('name', e.target.value)} />
-                <StyledLabel>Location</StyledLabel>
-                <StyledInput type="text" onChange={(e) => setFieldValue('location', e.target.value)} />
-                <StyledLabel>Water needs (number of days)</StyledLabel>
-                <StyledInput type="text" onChange={(e) => setFieldValue('waterNeeds', e.target.value)} />
-                <StyledLabel>Last watered (YYYY-MM-DD)</StyledLabel>
-                <StyledInput type="text" onChange={(e) => setFieldValue('lastWatered', e.target.value)} />
-              </ModalBody>
-              <ModalFooter>
-                <StyledButton type="submit" onClick={() => handleSubmit()}>
-                  <FormattedMessage defaultMessage="Add plant" description="Plants / add button" />
-                </StyledButton>
-              </ModalFooter>
-            </>
-          )}
-        </Formik>
+        <ModalBody>
+          <StyledLabel>Plant name</StyledLabel>
+          <StyledInput
+            type="text"
+            value={formValues.name}
+            onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
+          />
+          <StyledLabel>Location</StyledLabel>
+          <StyledInput
+            type="text"
+            value={formValues.location}
+            onChange={(e) => setFormValues({ ...formValues, location: e.target.value })}
+          />
+          <StyledLabel>Water needs (number of days)</StyledLabel>
+          <StyledInput
+            type="text"
+            value={formValues.waterNeeds}
+            onChange={(e) => setFormValues({ ...formValues, waterNeeds: e.target.value })}
+          />
+          <StyledLabel>Last watered (YYYY-MM-DD)</StyledLabel>
+          <StyledInput
+            type="text"
+            value={formValues.lastWatered}
+            onChange={(e) => setFormValues({ ...formValues, lastWatered: e.target.value })}
+          />
+        </ModalBody>
+        <ModalFooter>
+          <StyledButton
+            type="submit"
+            onClick={() => {
+              if (!plant.id) {
+                formValues.id = uuidv4();
+              }
+              action(formValues);
+              onClose();
+            }}
+          >
+            {buttonText}
+          </StyledButton>
+        </ModalFooter>
       </Modal>
     </Container>
   );
