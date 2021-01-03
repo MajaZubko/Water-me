@@ -1,9 +1,20 @@
+import 'react-dates/initialize';
 import React, { useState, useEffect } from 'react';
+import DatePicker from 'react-datepicker';
 import { v4 as uuidv4 } from 'uuid';
+import moment, { Moment } from 'moment';
 import Modal from 'react-modal';
 
 import { Plant } from '../../../modules/plants/plants.types';
-import { Container, StyledButton, StyledInput, StyledLabel, ModalBody, ModalFooter } from './formModal.styles';
+import {
+  Container,
+  StyledButton,
+  StyledInput,
+  StyledLabel,
+  DatePickerWrapper,
+  ModalBody,
+  ModalFooter,
+} from './formModal.styles';
 
 Modal.setAppElement('#app');
 
@@ -15,8 +26,11 @@ export interface ModalProps {
   buttonText?: string;
 }
 
+const DATE_FORMAT = 'YYYY-MM-DD';
+
 export const FormModal = ({ isOpen, onClose, plant, action, buttonText }: ModalProps) => {
   const [formValues, setFormValues] = useState(plant);
+  const [focusedDatePicker, setFocusedDatePicker] = useState(false);
 
   useEffect(() => {
     setFormValues(plant);
@@ -24,6 +38,15 @@ export const FormModal = ({ isOpen, onClose, plant, action, buttonText }: ModalP
 
   return (
     <Container>
+      <DatePicker
+        selected={formValues.lastWatered ? new Date(formValues.lastWatered) : new Date()}
+        onChange={(date: Date) =>
+          setFormValues({
+            ...formValues,
+            lastWatered: `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` || formValues.lastWatered,
+          })
+        }
+      />
       <Modal
         isOpen={isOpen}
         onRequestClose={onClose}
@@ -57,12 +80,19 @@ export const FormModal = ({ isOpen, onClose, plant, action, buttonText }: ModalP
             value={formValues.waterNeeds}
             onChange={(e) => setFormValues({ ...formValues, waterNeeds: e.target.value })}
           />
-          <StyledLabel>Last watered (YYYY-MM-DD)</StyledLabel>
-          <StyledInput
-            type="text"
-            value={formValues.lastWatered}
-            onChange={(e) => setFormValues({ ...formValues, lastWatered: e.target.value })}
-          />
+          <StyledLabel>Last watered</StyledLabel>
+          <DatePickerWrapper>
+            <DatePicker
+              selected={formValues.lastWatered ? new Date(formValues.lastWatered) : new Date()}
+              onChange={(date: Date) =>
+                setFormValues({
+                  ...formValues,
+                  lastWatered:
+                    `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}` || formValues.lastWatered,
+                })
+              }
+            />
+          </DatePickerWrapper>
         </ModalBody>
         <ModalFooter>
           <StyledButton
