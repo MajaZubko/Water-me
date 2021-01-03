@@ -18,5 +18,5 @@ export const usePlants = (): [
   const deletePlant = (plant: Plant) => dispatch(plantsActions.deletePlant(plant));
   const editPlant = (plant: Plant) => dispatch(plantsActions.editPlant(plant));
 
-  return [plants, fetchPlants, addPlant, deletePlant, editPlant];
+  return [plants, fetchPlants, editPlant, addPlant, deletePlant];
 };
