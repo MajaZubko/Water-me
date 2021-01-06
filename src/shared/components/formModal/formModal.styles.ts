@@ -42,3 +42,8 @@ export const ButtonsContainer = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const DelayForm = styled.div`
+  display: ${({ hidden }) => (hidden ? 'none' : 'flex')};
+  flex-direction: column;
+`;

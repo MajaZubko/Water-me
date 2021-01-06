@@ -4,10 +4,10 @@ import moment from 'moment';
 import Modal from 'react-modal';
 
 import { Plant } from '../../../modules/plants/plants.types';
-import { emptyPlant } from '../plants';
 import {
   ButtonsContainer,
   Container,
+  DelayForm,
   StyledButton,
   StyledInput,
   StyledLabel,
@@ -30,6 +30,7 @@ const DATE_FORMAT = 'YYYY-MM-DD';
 
 export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, buttonText }: ModalProps) => {
   const [formValues, setFormValues] = useState(plant);
+  const [isDelayFormShown, setIsDelayFormShown] = useState(false);
 
   useEffect(() => {
     setFormValues(plant);
@@ -40,6 +41,7 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
       <Modal
         isOpen={isOpen}
         onRequestClose={() => {
+          setIsDelayFormShown(false);
           onClose();
         }}
         style={{
@@ -83,21 +85,41 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
             onChange={(e) => setFormValues({ ...formValues, lastWatered: e.target.value })}
           />
           {onlyWatering && (
-            <ButtonsContainer>
-              <StyledButton
-                type="submit"
-                onClick={() => {
-                  action({
-                    ...formValues,
-                    lastWatered: moment().format(DATE_FORMAT),
-                  });
-                  onClose();
-                }}
-              >
-                Confirm watering
-              </StyledButton>
-              <StyledButton>Delay watering</StyledButton>
-            </ButtonsContainer>
+            <>
+              <ButtonsContainer>
+                <StyledButton
+                  type="submit"
+                  onClick={() => {
+                    action({
+                      ...formValues,
+                      lastWatered: moment().format(DATE_FORMAT),
+                      nextWatering: moment().clone().add(formValues.waterNeeds, 'days').format('YYYY-MM-DD'),
+                    });
+                    onClose();
+                  }}
+                >
+                  Confirm watering
+                </StyledButton>
+                <StyledButton onClick={() => setIsDelayFormShown(true)}>Delay watering</StyledButton>
+              </ButtonsContainer>
+              <DelayForm hidden={!isDelayFormShown}>
+                <StyledLabel>Enter next watering date</StyledLabel>
+                <StyledInput
+                  type="date"
+                  value={formValues.nextWatering}
+                  onChange={(e) => setFormValues({ ...formValues, nextWatering: e.target.value })}
+                />
+                <StyledButton
+                  type="submit"
+                  onClick={() => {
+                    action(formValues);
+                    onClose();
+                  }}
+                >
+                  Confirm new watering date
+                </StyledButton>
+              </DelayForm>
+            </>
           )}
         </ModalBody>
         <ModalFooter>
