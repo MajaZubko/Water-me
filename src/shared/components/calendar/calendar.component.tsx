@@ -20,7 +20,7 @@ export const Calendar = () => {
   const calendarEvents = plants.map((plant) => {
     return {
       title: `${plant.name} - ${plant.location}`,
-      date: moment(plant.lastWatered).clone().add(plant.waterNeeds, 'days').format('YYYY-MM-DD'),
+      date: plant.nextWatering,
       plant,
     };
   });

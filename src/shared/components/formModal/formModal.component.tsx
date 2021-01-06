@@ -4,7 +4,16 @@ import moment from 'moment';
 import Modal from 'react-modal';
 
 import { Plant } from '../../../modules/plants/plants.types';
-import { Container, StyledButton, StyledInput, StyledLabel, ModalBody, ModalFooter } from './formModal.styles';
+import {
+  ButtonsContainer,
+  Container,
+  DelayForm,
+  StyledButton,
+  StyledInput,
+  StyledLabel,
+  ModalBody,
+  ModalFooter,
+} from './formModal.styles';
 
 Modal.setAppElement('#app');
 
@@ -21,18 +30,20 @@ const DATE_FORMAT = 'YYYY-MM-DD';
 
 export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, buttonText }: ModalProps) => {
   const [formValues, setFormValues] = useState(plant);
+  const [isDelayFormShown, setIsDelayFormShown] = useState(false);
 
   useEffect(() => {
     setFormValues(plant);
   }, [plant]);
 
-  console.log(moment(formValues.lastWatered));
-
   return (
     <Container>
       <Modal
         isOpen={isOpen}
-        onRequestClose={onClose}
+        onRequestClose={() => {
+          setIsDelayFormShown(false);
+          onClose();
+        }}
         style={{
           content: {
             top: '50%',
@@ -66,39 +77,73 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
             value={formValues.waterNeeds}
             onChange={(e) => setFormValues({ ...formValues, waterNeeds: e.target.value })}
           />
-          {onlyWatering && (
-            <StyledButton
-              onClick={() =>
-                setFormValues({
-                  ...formValues,
-                  lastWatered: moment().format(DATE_FORMAT),
-                })
-              }
-            >
-              Confirm watering
-            </StyledButton>
-          )}
-
-          <StyledLabel>Last watered (YYYY-MM-DD)</StyledLabel>
+          <StyledLabel>Last watered</StyledLabel>
           <StyledInput
-            type="text"
+            disabled={onlyWatering}
+            type="date"
             value={formValues.lastWatered}
             onChange={(e) => setFormValues({ ...formValues, lastWatered: e.target.value })}
           />
+          {onlyWatering && (
+            <>
+              <ButtonsContainer>
+                <StyledButton
+                  type="submit"
+                  onClick={() => {
+                    action({
+                      ...formValues,
+                      lastWatered: moment().format(DATE_FORMAT),
+                      nextWatering: moment().clone().add(formValues.waterNeeds, 'days').format('YYYY-MM-DD'),
+                    });
+                    onClose();
+                  }}
+                >
+                  Confirm watering
+                </StyledButton>
+                <StyledButton onClick={() => setIsDelayFormShown(true)}>Delay watering</StyledButton>
+              </ButtonsContainer>
+              <DelayForm hidden={!isDelayFormShown}>
+                <StyledLabel>Enter next watering date</StyledLabel>
+                <StyledInput
+                  type="date"
+                  value={formValues.nextWatering}
+                  onChange={(e) => setFormValues({ ...formValues, nextWatering: e.target.value })}
+                />
+                <StyledButton
+                  type="submit"
+                  onClick={() => {
+                    action(formValues);
+                    onClose();
+                  }}
+                >
+                  Confirm new watering date
+                </StyledButton>
+              </DelayForm>
+            </>
+          )}
         </ModalBody>
         <ModalFooter>
-          <StyledButton
-            type="submit"
-            onClick={() => {
-              if (!plant.id) {
-                formValues.id = uuidv4();
-              }
-              action(formValues);
-              onClose();
-            }}
-          >
-            {buttonText}
-          </StyledButton>
+          {!onlyWatering && (
+            <StyledButton
+              type="submit"
+              onClick={() => {
+                if (!plant.id) {
+                  setFormValues({ ...formValues, id: uuidv4() });
+                }
+                setFormValues({
+                  ...formValues,
+                  nextWatering: moment(formValues.lastWatered)
+                    .clone()
+                    .add(formValues.waterNeeds, 'days')
+                    .format('YYYY-MM-DD'),
+                });
+                action(formValues);
+                onClose();
+              }}
+            >
+              {buttonText} plant
+            </StyledButton>
+          )}
         </ModalFooter>
       </Modal>
     </Container>

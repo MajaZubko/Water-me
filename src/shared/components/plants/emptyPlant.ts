@@ -1,1 +1,1 @@
-export const emptyPlant = { id: '', name: '', location: '', waterNeeds: '', lastWatered: '' };
+export const emptyPlant = { id: '', name: '', location: '', waterNeeds: '', lastWatered: '', nextWatering: '' };
