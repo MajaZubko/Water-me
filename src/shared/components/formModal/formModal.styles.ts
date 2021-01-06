@@ -37,3 +37,8 @@ export const ModalFooter = styled.div`
   display: flex;
   justify-content: flex-end;
 `;
+
+export const ButtonsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

@@ -4,6 +4,7 @@ export interface Plant {
   location: string;
   waterNeeds: string;
   lastWatered: string;
+  nextWatering: string;
 }
 
 export interface PlantsState {

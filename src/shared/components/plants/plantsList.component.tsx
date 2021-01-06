@@ -24,17 +24,20 @@ export const PlantsList = () => {
     <Container>
       <FormModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {
+          setModalPlant(emptyPlant);
+          setIsModalOpen(false);
+        }}
         action={modalMode === 'add' ? addPlant : editPlant}
         plant={modalPlant}
-        buttonText={modalMode === 'add' ? 'Add plant' : 'Edit plant'}
+        buttonText={modalMode}
         onlyWatering={modalMode === 'water'}
       />
       <StyledButton
         onClick={() => {
-          setIsModalOpen(true);
           setModalPlant(emptyPlant);
           setModalMode('add');
+          setIsModalOpen(true);
         }}
       >
         Add plants

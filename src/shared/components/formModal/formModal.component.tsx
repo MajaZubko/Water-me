@@ -4,7 +4,16 @@ import moment from 'moment';
 import Modal from 'react-modal';
 
 import { Plant } from '../../../modules/plants/plants.types';
-import { Container, StyledButton, StyledInput, StyledLabel, ModalBody, ModalFooter } from './formModal.styles';
+import { emptyPlant } from '../plants';
+import {
+  ButtonsContainer,
+  Container,
+  StyledButton,
+  StyledInput,
+  StyledLabel,
+  ModalBody,
+  ModalFooter,
+} from './formModal.styles';
 
 Modal.setAppElement('#app');
 
@@ -30,7 +39,9 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
     <Container>
       <Modal
         isOpen={isOpen}
-        onRequestClose={onClose}
+        onRequestClose={() => {
+          onClose();
+        }}
         style={{
           content: {
             top: '50%',
@@ -64,39 +75,53 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
             value={formValues.waterNeeds}
             onChange={(e) => setFormValues({ ...formValues, waterNeeds: e.target.value })}
           />
-          {onlyWatering && (
-            <StyledButton
-              onClick={() =>
-                setFormValues({
-                  ...formValues,
-                  lastWatered: moment().format(DATE_FORMAT),
-                })
-              }
-            >
-              Confirm watering
-            </StyledButton>
-          )}
-
           <StyledLabel>Last watered</StyledLabel>
           <StyledInput
+            disabled={onlyWatering}
             type="date"
             value={formValues.lastWatered}
             onChange={(e) => setFormValues({ ...formValues, lastWatered: e.target.value })}
           />
+          {onlyWatering && (
+            <ButtonsContainer>
+              <StyledButton
+                type="submit"
+                onClick={() => {
+                  action({
+                    ...formValues,
+                    lastWatered: moment().format(DATE_FORMAT),
+                  });
+                  onClose();
+                }}
+              >
+                Confirm watering
+              </StyledButton>
+              <StyledButton>Delay watering</StyledButton>
+            </ButtonsContainer>
+          )}
         </ModalBody>
         <ModalFooter>
-          <StyledButton
-            type="submit"
-            onClick={() => {
-              if (!plant.id) {
-                formValues.id = uuidv4();
-              }
-              action(formValues);
-              onClose();
-            }}
-          >
-            {buttonText}
-          </StyledButton>
+          {!onlyWatering && (
+            <StyledButton
+              type="submit"
+              onClick={() => {
+                if (!plant.id) {
+                  setFormValues({ ...formValues, id: uuidv4() });
+                }
+                setFormValues({
+                  ...formValues,
+                  nextWatering: moment(formValues.lastWatered)
+                    .clone()
+                    .add(formValues.waterNeeds, 'days')
+                    .format('YYYY-MM-DD'),
+                });
+                action(formValues);
+                onClose();
+              }}
+            >
+              {buttonText} plant
+            </StyledButton>
+          )}
         </ModalFooter>
       </Modal>
     </Container>
