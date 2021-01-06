@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Delete, Edit } from '@material-ui/icons';
+import { sortBy } from 'lodash';
+import { Delete, Edit, Opacity } from '@material-ui/icons';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -27,6 +28,7 @@ export const PlantsList = () => {
         action={modalMode === 'add' ? addPlant : editPlant}
         plant={modalPlant}
         buttonText={modalMode === 'add' ? 'Add plant' : 'Edit plant'}
+        onlyWatering={modalMode === 'water'}
       />
       <StyledButton
         onClick={() => {
@@ -44,14 +46,20 @@ export const PlantsList = () => {
           <ListHeader>Water needs</ListHeader>
           <ListHeader>Last watered</ListHeader>
         </li>
-        {plants.map((plant, i) => (
+        {sortBy(plants, 'name').map((plant, i) => (
           <li key={i}>
             <div>{plant.name}</div>
             <div>{plant.location}</div>
             <div>{plant.waterNeeds}</div>
             <div>{plant.lastWatered}</div>
-            <IconButton onClick={() => deletePlant(plant)}>
-              <Delete />
+            <IconButton
+              onClick={() => {
+                setModalPlant(plant);
+                setModalMode('water');
+                setIsModalOpen(true);
+              }}
+            >
+              <Opacity />
             </IconButton>
             <IconButton
               onClick={() => {
@@ -61,6 +69,9 @@ export const PlantsList = () => {
               }}
             >
               <Edit />
+            </IconButton>
+            <IconButton onClick={() => deletePlant(plant)}>
+              <Delete />
             </IconButton>
           </li>
         ))}

@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import { Button, Input } from '@material-ui/core';
-import Modal from 'react-modal';
-import { regular } from '../../../theme/border';
 
 export const Container = styled.div`
   display: flex;
@@ -11,7 +9,7 @@ export const Container = styled.div`
 
 export const StyledInput = styled(Input)`
   && {
-    width: 400px;
+    width: 350px;
 
     input {
       padding: 4px 0;
@@ -30,7 +28,7 @@ export const StyledButton = styled(Button)`
 `;
 
 export const ModalBody = styled.div`
-  width: 450px;
+  width: 350px;
   display: flex;
   flex-direction: column;
 `;

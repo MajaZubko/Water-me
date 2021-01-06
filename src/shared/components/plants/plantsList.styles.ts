@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Button, Card, Input } from '@material-ui/core';
+import { Button } from '@material-ui/core';
 
 export const Container = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ export const List = styled.ul`
 
   li {
     display: grid;
-    grid-template-columns: repeat(4, 150px) 40px 40px;
+    grid-template-columns: repeat(4, 150px) repeat(3, 40px);
     text-align: start;
     padding-bottom: 4px;
   }
