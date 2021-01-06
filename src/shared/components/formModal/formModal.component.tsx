@@ -26,8 +26,6 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
     setFormValues(plant);
   }, [plant]);
 
-  console.log(moment(formValues.lastWatered));
-
   return (
     <Container>
       <Modal
@@ -79,9 +77,9 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
             </StyledButton>
           )}
 
-          <StyledLabel>Last watered (YYYY-MM-DD)</StyledLabel>
+          <StyledLabel>Last watered</StyledLabel>
           <StyledInput
-            type="text"
+            type="date"
             value={formValues.lastWatered}
             onChange={(e) => setFormValues({ ...formValues, lastWatered: e.target.value })}
           />

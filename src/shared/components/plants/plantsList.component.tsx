@@ -31,6 +31,7 @@ export const PlantsList = () => {
       <StyledButton
         onClick={() => {
           setIsModalOpen(true);
+          setModalPlant(emptyPlant);
           setModalMode('add');
         }}
       >
