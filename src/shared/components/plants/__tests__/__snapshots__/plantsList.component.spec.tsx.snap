@@ -1,0 +1,104 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`PlantsList: Component should render correctly 1`] = `
+.c1 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c2.c2 {
+  margin-top: 20px;
+}
+
+.c3 {
+  list-style-type: none;
+  margin-top: 16px;
+  margin-right: 20px;
+  padding: 0;
+}
+
+.c3 li {
+  display: grid;
+  grid-template-columns: repeat(4,150px) repeat(3,40px);
+  text-align: start;
+  padding-bottom: 4px;
+}
+
+.c4 {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom: 8px;
+}
+
+<div
+  class="c0"
+>
+  <div
+    class="c1"
+  />
+  <button
+    class="MuiButtonBase-root MuiButton-root MuiButton-text c2"
+    tabindex="0"
+    type="button"
+  >
+    <span
+      class="MuiButton-label"
+    >
+      Add plants
+    </span>
+    <span
+      class="MuiTouchRipple-root"
+    />
+  </button>
+  <ul
+    class="c3"
+  >
+    <li>
+      <div
+        class="c4"
+      >
+        Plant name
+      </div>
+      <div
+        class="c4"
+      >
+        Location
+      </div>
+      <div
+        class="c4"
+      >
+        Water needs
+      </div>
+      <div
+        class="c4"
+      >
+        Last watered
+      </div>
+    </li>
+  </ul>
+</div>
+`;

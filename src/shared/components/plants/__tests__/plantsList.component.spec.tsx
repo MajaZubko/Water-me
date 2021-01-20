@@ -1,9 +1,9 @@
 import React from 'react';
-import { AllPlants } from '../allPlants.component';
-import { makeContextRenderer } from '../../../shared/utils/testUtils';
+import { PlantsList } from '../plantsList.component';
+import { makeContextRenderer } from '../../../utils/testUtils';
 
-describe('AllPlants: Component', () => {
-  const component = () => <AllPlants />;
+describe('PlantsList: Component', () => {
+  const component = () => <PlantsList />;
   const render = makeContextRenderer(component);
 
   it('should render correctly', () => {

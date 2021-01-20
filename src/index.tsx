@@ -14,6 +14,7 @@ import 'normalize.css/normalize.css';
 import './theme/global';
 import configureStore from './config/store';
 import browserHistory from './shared/utils/history';
+import { FormModal as Modal } from './shared/components/formModal';
 import UnsupportedBrowserDetection from './shared/utils/unsupported/unsupportedBrowserDetection';
 import { setUnsupportedClasses } from './shared/utils/unsupported/support';
 
@@ -40,6 +41,8 @@ const store = configureStore(initialState);
 
 const render = (): void => {
   const NextApp = require('./routes').default;
+
+  Modal.setAppElement('#app');
 
   ReactDOM.render(
     <Provider store={store}>

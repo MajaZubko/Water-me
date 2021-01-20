@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AllPlants: Component should render correctly 1`] = `
+.c4 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.c3 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.c5.c5 {
+  margin-top: 20px;
+}
+
+.c6 {
+  list-style-type: none;
+  margin-top: 16px;
+  margin-right: 20px;
+  padding: 0;
+}
+
+.c6 li {
+  display: grid;
+  grid-template-columns: repeat(4,150px) repeat(3,40px);
+  text-align: start;
+  padding-bottom: 4px;
+}
+
+.c7 {
+  text-transform: uppercase;
+  font-weight: bold;
+  padding-bottom: 8px;
+}
+
+.c1 {
+  font-family: Trebuchet MS,sans-serif;
+  font-weight: bold;
+  color: #000000;
+}
+
+.c2 {
+  margin-bottom: 16px;
+  -webkit-text-decoration: none;
+  text-decoration: none;
+  color: #009988;
+}
+
+.c0 {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  text-align: center;
+}
+
+<div
+  class="c0"
+>
+  <h1
+    class="c1"
+  >
+    All plants
+  </h1>
+  <a
+    class="c2"
+    href="/"
+  >
+    Watering calendar
+  </a>
+  <div
+    class="c3"
+  >
+    <div
+      class="c4"
+    />
+    <button
+      class="MuiButtonBase-root MuiButton-root MuiButton-text c5"
+      tabindex="0"
+      type="button"
+    >
+      <span
+        class="MuiButton-label"
+      >
+        Add plants
+      </span>
+      <span
+        class="MuiTouchRipple-root"
+      />
+    </button>
+    <ul
+      class="c6"
+    >
+      <li>
+        <div
+          class="c7"
+        >
+          Plant name
+        </div>
+        <div
+          class="c7"
+        >
+          Location
+        </div>
+        <div
+          class="c7"
+        >
+          Water needs
+        </div>
+        <div
+          class="c7"
+        >
+          Last watered
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+`;
