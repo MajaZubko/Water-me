@@ -11,7 +11,7 @@ describe('useActiveBreakpoint: Hook', () => {
     matchMedia.mockReset();
   });
 
-  describe('for mobile', () => {
+  xdescribe('for mobile', () => {
     beforeEach(() => {
       // @ts-ignore
       matchMedia.mockReturnValue({ matches: false });
@@ -25,7 +25,7 @@ describe('useActiveBreakpoint: Hook', () => {
     });
   });
 
-  describe('for desktop', () => {
+  xdescribe('for desktop', () => {
     beforeEach(() => {
       // @ts-ignore
       matchMedia.mockReturnValue({ matches: true });

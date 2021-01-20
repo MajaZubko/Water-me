@@ -1,12 +1,12 @@
 import React from 'react';
 import { screen, fireEvent } from '@testing-library/react';
-import { ButtonComponentProps, ButtonComponent as Button } from '../button.component';
+import { ButtonProps, Button } from '../button.component';
 import { makePropsRenderer } from '../../../utils/testUtils';
 
 describe('Button: Component', () => {
   const defaultProps = {};
 
-  const component = (props: Partial<ButtonComponentProps>) => <Button {...defaultProps} {...props} />;
+  const component = (props: Partial<ButtonProps>) => <Button {...defaultProps} {...props} />;
   const render = makePropsRenderer(component);
 
   it('should call onClick prop when clicked', () => {
