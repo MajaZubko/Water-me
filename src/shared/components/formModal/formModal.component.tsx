@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import moment from 'moment';
 import Modal from 'react-modal';
+import { FormattedMessage } from 'react-intl';
 
 import { Plant } from '../../../modules/plants/plants.types';
 import {
@@ -55,28 +56,40 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
         }}
       >
         <ModalBody>
-          <StyledLabel>Plant name</StyledLabel>
+          <StyledLabel>
+            <FormattedMessage id="plantName" defaultMessage="Plant name" description="Plant name / Header" />
+          </StyledLabel>
           <StyledInput
             disabled={onlyWatering}
             type="text"
             value={formValues.name}
             onChange={(e) => setFormValues({ ...formValues, name: e.target.value })}
           />
-          <StyledLabel>Location</StyledLabel>
+          <StyledLabel>
+            <FormattedMessage id="location" defaultMessage="Location" description="Location / Header" />
+          </StyledLabel>
           <StyledInput
             disabled={onlyWatering}
             type="text"
             value={formValues.location}
             onChange={(e) => setFormValues({ ...formValues, location: e.target.value })}
           />
-          <StyledLabel>Water needs (number of days)</StyledLabel>
+          <StyledLabel>
+            <FormattedMessage
+              id="waterNeedsLabel"
+              defaultMessage="Water needs (number of days)"
+              description="Water needs / Label"
+            />
+          </StyledLabel>
           <StyledInput
             disabled={onlyWatering}
             type="text"
             value={formValues.waterNeeds}
             onChange={(e) => setFormValues({ ...formValues, waterNeeds: e.target.value })}
           />
-          <StyledLabel>Last watered</StyledLabel>
+          <StyledLabel>
+            <FormattedMessage id="lastWatered" defaultMessage="Last watered" description="Last watered / Header" />
+          </StyledLabel>
           <StyledInput
             disabled={onlyWatering}
             type="date"
@@ -97,12 +110,28 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
                     onClose();
                   }}
                 >
-                  Confirm watering
+                  <FormattedMessage
+                    id="confirmWatering"
+                    defaultMessage="Confirm watering"
+                    description="Confirm watering / Button"
+                  />
                 </StyledButton>
-                <StyledButton onClick={() => setIsDelayFormShown(true)}>Delay watering</StyledButton>
+                <StyledButton onClick={() => setIsDelayFormShown(true)}>
+                  <FormattedMessage
+                    id="delayWatering"
+                    defaultMessage="Delay watering"
+                    description="Delay watering / Button"
+                  />
+                </StyledButton>
               </ButtonsContainer>
               <DelayForm hidden={!isDelayFormShown}>
-                <StyledLabel>Enter next watering date</StyledLabel>
+                <StyledLabel>
+                  <FormattedMessage
+                    id="enterNextWatering"
+                    defaultMessage="Enter next watering date"
+                    description="Enter next watering / Label"
+                  />
+                </StyledLabel>
                 <StyledInput
                   type="date"
                   value={formValues.nextWatering}
@@ -115,7 +144,11 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
                     onClose();
                   }}
                 >
-                  Confirm new watering date
+                  <FormattedMessage
+                    id="confirmNewWatering"
+                    defaultMessage="Confirm new watering date"
+                    description="Confirm new watering / Button"
+                  />
                 </StyledButton>
               </DelayForm>
             </>
@@ -140,7 +173,12 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
                 onClose();
               }}
             >
-              {buttonText} plant
+              {buttonText === 'add' && (
+                <FormattedMessage id="addPlantButton" defaultMessage="Add plant" description="Add plant / Button" />
+              )}
+              {buttonText === 'edit' && (
+                <FormattedMessage id="editPlantButton" defaultMessage="Edit plant" description="Edit plant / Button" />
+              )}
             </StyledButton>
           )}
         </ModalFooter>

@@ -1,1 +1,19 @@
-{}
+{
+  "pageTitle": "Podlej mnie",
+  "allPlants": "Lista roślin",
+  "homepage": "Strona główna",
+  "allPlantsLink": "Lista roślin",
+  "wateringCalendarLink": "Kalendarz podlewania",
+  "addPlantsButton": "Dodaj rośliny",
+  "addPlantButton": "Dodaj roślinę",
+  "editPlantButton": "Edytuj roślinę",
+  "confirmWatering": "Zatwierdź podlewanie",
+  "delayWatering": "Przełóż podelewanie",
+  "confirmNewWatering": "Zatwierdź nową datę podlewania",
+  "plantName": "Nazwa rośliny",
+  "location": "Umiejscowienie",
+  "waterNeeds": "Potrzeby wodne",
+  "lastWatered": "Ostatnie podlewanie",
+  "waterNeedsLabel": "Potrzeby wodne (co ile dni)",
+  "enterNextWatering": "Wprowadź nową datę podlewania"
+}

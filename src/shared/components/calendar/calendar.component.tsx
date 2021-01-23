@@ -1,13 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import moment from 'moment';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import { useSelector } from 'react-redux';
 
 import { FormModal } from '../formModal';
 import { emptyPlant, usePlants } from '../plants';
 import { Container } from './calendar.styles';
+import { localesSelectors } from '../../../modules/locales';
 
 export const Calendar = () => {
+  const language = useSelector(localesSelectors.selectLocalesLanguage);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalPlant, setModalPlant] = useState(emptyPlant);
 
@@ -28,6 +31,7 @@ export const Calendar = () => {
   return (
     <Container>
       <FullCalendar
+        locale={language || 'en'}
         plugins={[dayGridPlugin]}
         initialView="dayGridMonth"
         firstDay={1}
