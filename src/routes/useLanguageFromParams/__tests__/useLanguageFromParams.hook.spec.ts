@@ -2,7 +2,7 @@ import { renderHook } from '@testing-library/react-hooks';
 import { useLanguageFromParams } from '../useLanguageFromParams.hook';
 import { localesActions } from '../../../modules/locales';
 import { DEFAULT_LOCALE, LOCALES } from '../../../i18n';
-import { store as mockStore } from '../../../../fixtures/store';
+import { store as mockStore } from '../../../mocks/store';
 
 const render = () => renderHook(() => useLanguageFromParams());
 

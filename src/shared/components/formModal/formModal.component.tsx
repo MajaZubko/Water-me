@@ -15,8 +15,6 @@ import {
   ModalFooter,
 } from './formModal.styles';
 
-Modal.setAppElement('#app');
-
 export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -24,6 +22,7 @@ export interface ModalProps {
   action: (plant: Plant) => void;
   buttonText?: string;
   onlyWatering?: boolean;
+  setAppElement?: unknown;
 }
 
 const DATE_FORMAT = 'YYYY-MM-DD';
@@ -149,3 +148,5 @@ export const FormModal = ({ isOpen, onClose, plant, action, onlyWatering, button
     </Container>
   );
 };
+
+FormModal.setAppElement = Modal.setAppElement;
