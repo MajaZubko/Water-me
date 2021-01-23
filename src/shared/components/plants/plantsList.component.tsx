@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { sortBy } from 'lodash';
+import { FormattedMessage } from 'react-intl';
 import { Delete, Edit, Opacity } from '@material-ui/icons';
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -40,14 +41,22 @@ export const PlantsList = () => {
           setIsModalOpen(true);
         }}
       >
-        Add plants
+        <FormattedMessage id="addPlantsButton" defaultMessage="Add plants" description="Add plants / Button" />
       </StyledButton>
       <List>
         <li>
-          <ListHeader>Plant name</ListHeader>
-          <ListHeader>Location</ListHeader>
-          <ListHeader>Water needs</ListHeader>
-          <ListHeader>Last watered</ListHeader>
+          <ListHeader>
+            <FormattedMessage id="plantName" defaultMessage="Plant name" description="Plant name / Header" />
+          </ListHeader>
+          <ListHeader>
+            <FormattedMessage id="location" defaultMessage="Location" description="Location / Header" />
+          </ListHeader>
+          <ListHeader>
+            <FormattedMessage id="waterNeeds" defaultMessage="Water needs" description="Water needs / Header" />
+          </ListHeader>
+          <ListHeader>
+            <FormattedMessage id="lastWatered" defaultMessage="Last watered" description="Last watered / Header" />
+          </ListHeader>
         </li>
         {sortBy(plants, 'name').map((plant, i) => (
           <li key={i}>

@@ -33,7 +33,7 @@ export const List = styled.ul`
 
   li {
     display: grid;
-    grid-template-columns: repeat(4, 150px) repeat(3, 40px);
+    grid-template-columns: repeat(4, 180px) repeat(3, 40px);
     text-align: start;
     padding-bottom: 4px;
   }
