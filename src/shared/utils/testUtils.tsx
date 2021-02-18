@@ -7,14 +7,14 @@ import { Provider } from 'react-redux';
 import { createMemoryHistory, MemoryHistory } from 'history';
 import { Route, Router } from 'react-router';
 import { IntlProvider } from 'react-intl';
-import { produce } from 'immer';
+import produce from 'immer';
 
 import { DEFAULT_LOCALE, translationMessages, MessagesObject } from '../../i18n';
 import { store as fixturesStore } from '../../mocks/store';
 import createReducer, { GlobalState } from '../../config/reducers';
 
 export const PLACEHOLDER_TEST_ID = 'content';
-export const PLACEHOLDER_CONTENT = <span data-testid="app">content</span>;
+export const PLACEHOLDER_CONTENT = <span data-testid="content">content</span>;
 
 export const spiedHistory = (route = '/') => {
   const history = createMemoryHistory({ initialEntries: [route] });
@@ -64,7 +64,7 @@ export const ProvidersWrapper = ({ children, context = {} }: ProvidersWrapperPro
   );
 };
 
-export const makeContextRenderer = <T, _>(component: (props: T | Record<string, unknown>) => ReactElement) => (
+export const makeContextRenderer = <T, _>(component: (props: T | Record<string, never>) => ReactElement) => (
   props?: T,
   context?: ContextData
 ) =>
@@ -72,6 +72,5 @@ export const makeContextRenderer = <T, _>(component: (props: T | Record<string, 
     wrapper: ({ children }) => <ProvidersWrapper context={context}>{children}</ProvidersWrapper>,
   });
 
-export const makePropsRenderer = <T, _>(component: (props: T | Record<string, unknown>) => ReactElement) => (
-  props?: T
-) => render(component(props ?? {}));
+export const makePropsRenderer = <T, _>(component: (props: T | Record<string, never>) => ReactElement) => (props?: T) =>
+  render(component(props ?? {}));

@@ -10,8 +10,13 @@ describe('Button: Component', () => {
   const render = makePropsRenderer(component);
 
   it('should call onClick prop when clicked', () => {
+    const label = <span>PRESS HERE</span>;
     const onClick = jest.fn();
-    render({ onClick });
+    render({ onClick, children: label });
+
+    fireEvent.click(screen.getByText('PRESS HERE'));
+    expect(onClick).toHaveBeenCalled();
+    onClick.mockReset();
     fireEvent.click(screen.getByRole('button'));
     expect(onClick).toHaveBeenCalled();
   });
