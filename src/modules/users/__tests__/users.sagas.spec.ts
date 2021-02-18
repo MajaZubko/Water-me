@@ -1,26 +1,24 @@
-// import { expectSaga } from 'redux-saga-test-plan';
-//
-// import { watchUsers, USERS_URL } from '../users.sagas';
-// import { usersActions } from '..';
-// import { mockApi } from '../../../shared/utils/mockApi';
-// import { usersMock } from '../../../../fixtures/users';
+import { expectSaga } from 'redux-saga-test-plan';
 
-describe('Users: sagas:', () => {
-  it('should run a test', () => {
-    expect(1).toEqual(1);
+import { times } from 'ramda';
+import { watchUsers } from '../users.sagas';
+import { usersActions } from '..';
+import { userFactory } from '../../../mocks/factories';
+import { mockGetUsers } from '../../../mocks/server/handlers';
+import { server } from '../../../mocks/server';
+
+const usersMock = times(() => userFactory(), 10);
+
+describe('Users: sagas', () => {
+  const defaultState = {};
+
+  it('should fetch users', async () => {
+    server.use(mockGetUsers(usersMock));
+
+    await expectSaga(watchUsers)
+      .withState(defaultState)
+      .put(usersActions.fetchUsers.resolved(usersMock))
+      .dispatch(usersActions.fetchUsers())
+      .silentRun();
   });
 });
-
-// xdescribe('Users: sagas', () => {
-//   const defaultState = {};
-//
-//   xit('should fetch users', async () => {
-//     mockApi.get(USERS_URL).reply(200, usersMock);
-//
-//     await expectSaga(watchUsers)
-//       .withState(defaultState)
-//       .put(usersActions.fetchUsersSuccess(usersMock))
-//       .dispatch(usersActions.fetchUsers())
-//       .silentRun();
-//   });
-// });

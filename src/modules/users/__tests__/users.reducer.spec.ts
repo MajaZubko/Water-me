@@ -1,15 +1,10 @@
-import { times } from 'ramda';
-
-import { prepareState } from '../../../mocks/store';
-import { userFactory } from '../../../mocks/factories';
+import { store } from '../../../mocks/store';
 import { reducer } from '../users.reducer';
 
 describe('Users: reducer', () => {
-  const defaultState = prepareState((state) => {
-    state.users.users = times(() => userFactory(), 5);
-  }).users;
+  const defaultState = store.users;
 
-  xit('should return initial state', () => {
+  it('should return initial state', () => {
     expect(reducer(undefined, { type: 'unknown-action' })).toEqual(defaultState);
   });
 

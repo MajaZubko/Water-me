@@ -7,9 +7,6 @@ describe('Startup: sagas', () => {
   const defaultState = {};
 
   it('should run successfully', async () => {
-    await expectSaga(watchStartup)
-      .withState(defaultState)
-      .dispatch(startupActions.startup())
-      .silentRun();
+    await expectSaga(watchStartup).withState(defaultState).dispatch(startupActions.startup());
   });
 });
